@@ -1,0 +1,45 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.melayang {
+    position:fixed;
+    z-index: 10;
+    width: 100%;
+}
+
+.font-judul{
+    font-family: 'Major Mono Display', monospace;
+}
+
+.utama{
+    width: 100%;
+    height: 100vh;
+    z-index: -10;
+}
+
+.deskripsi{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.sekon{
+    width: 100%;
+    height: 100vh;
+}
+
+.sekon div{
+    position: relative;
+    top: 25px;
+    height: 80vh;
+}
+.w-gambar{
+    position: relative;
+    margin: auto;
+    border-radius: 15px;
+    width: 60%;
+}

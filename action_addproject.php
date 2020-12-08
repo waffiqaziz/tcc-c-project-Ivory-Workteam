@@ -29,6 +29,10 @@ $projects_id = (int)$hasil['project_id'];
 $query = "INSERT INTO workspace (user_id, project_id, role) VALUES('$user_id','$projects_id','$role')";
 $hasil = mysqli_query($conn, $query);
 
+$parent_judul = 'New...';
+
+$query = "INSERT INTO sprint_parent (parent_judul, project_id) VALUES('$parent_judul','$projects_id')";
+$hasil = mysqli_query($conn, $query);
 
 
 if ($hasil) {

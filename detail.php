@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./detail.css">
 </head>
 
 <body>
@@ -27,7 +28,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item my-2">
-                    <a class="text-light ml-3 font-weight-bolder" href="#" style="font-size: 16px;">
+                    <a class="text-light ml-3 font-weight-bolder" href="./homepage.php" style="font-size: 16px;">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="mb-1 bi bi-calendar3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" />
                             <path fill-rule="evenodd" d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
@@ -42,7 +43,7 @@
                         <?php echo $nama ?>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Profile</a>
+                        <a class="dropdown-item" href="./profile.php">Profile</a>
                         <a class="dropdown-item" href="#">Logout</a>
                     </div>
                 </div>
@@ -98,7 +99,7 @@
                             $union = mysqli_query($conn, $query);
                             while ($hasil = mysqli_fetch_assoc($union)) {
                             ?>
-                                <a class="btn btn-secondary rounded-circle mx-1">
+                                <a class="btn btn-secondary rounded-circle mx-1" href="./profile.php?id=<?php echo $hasil['user_id'] ?>" title="<?php echo $hasil['name'] ?>">
                                     <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
                                     </svg>
@@ -115,6 +116,63 @@
                             Invite
                         </button>
                     </div>
+                </div>
+                <div class="scrollmenu container rounded-lg shadow p-3" style="display: flex;">
+                    <?php
+                    $query = "SELECT * FROM sprint_parent WHERE project_id =  $project_id";
+                    $parent = mysqli_query($conn, $query);
+                    while ($hasil = mysqli_fetch_assoc($parent)) {
+                    ?>
+                        <div id="parentcard" class="card m-3 col-md-3 shadow" style="width: 18rem; height:auto;">
+                            <div class="card-body">
+                                <h5 class="card-title d-inline mr-5"><?php echo $hasil['parent_judul'] ?></h5>
+                                <?php
+                                $parent_id = $hasil['parent_id'];
+                                $query = "SELECT * FROM sprint_child WHERE parent_id =  '$parent_id' ";
+                                $child = mysqli_query($conn, $query);
+                                while ($result = mysqli_fetch_assoc($child)) {
+                                ?>
+                                    <div class="card my-2" style="width: 100%; max-width:12em;">
+                                        <div class="card-body p-1">
+                                            <p class="card-title" style="height: auto;"><?php echo $result['child_judul'] ?>
+                                                <a href="#">
+                                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                                        <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                                    </svg>
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+                                <hr>
+                                <div class="btn-group dropright d-inline">
+                                    <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                    <div class="dropdown-menu">
+                                        <a id="editparent" bikinan="<?php echo $hasil['parent_id'] ?>" role="button" data-toggle="modal" data-target="#EditSprintModal" class="dropdown-item" href="#">Edit</a>
+                                        <form action="./action_deleteproject.php" method="post">
+                                            <input type="hidden" name="parentID" value="<?php echo $hasil['parent_id'] ?>">
+                                            <input type="hidden" name="projectID" value="<?php echo $project_id?>">
+                                            <button type="submit" class="btn dropdown-item">Delete</button>
+                                        </form>
+                                        <div class="dropdown-divider"></div>
+                                        <a role="button" data-toggle="modal" data-target="#AddSprintModal" class="dropdown-item" href="#">New ... </a>
+                                    </div>
+                                </div>
+                                <button id="editparent" bikinan="<?php echo $hasil['parent_id'] ?>" type="button" data-toggle="modal" data-target="#CardModal" class="btn btn-sm btn-outline-secondary">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="mb-1 bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                        <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                    </svg>
+                                    Add Card
+                                </button>
+                            </div>
+                        </div>
+                    <?php
+                    }
+                    ?>
                 </div>
         </div>
         </main>
@@ -180,6 +238,84 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="CardModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add a Card </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="POST" action="./action_addtask.php">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="exampleInputjudul">Task</label>
+                            <input name="task" type="text" class="form-control shadow" id="exampleInputjudul" aria-describedby="judulHelp" placeholder="Enter your task">
+                        </div>
+                        <input type="hidden" name="parentID" value="0" id="parentcardid">
+                        <input type="hidden" name="projectID" value="<?php echo $project_id ?>">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-outline-secondary">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="AddSprintModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add sprint to board</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="POST" action="./action_addparent.php">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="exampleInputjudul">Title </label>
+                            <input name="title" type="text" class="form-control shadow" id="exampleInputjudul" aria-describedby="judulHelp" placeholder="Enter sprint title">
+                        </div>
+                        <input type="hidden" name="projectID" value="<?php echo $project_id ?>">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-outline-secondary">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="EditSprintModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit sprint</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="POST" action="./action_editparent.php">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="exampleInputjudul">Title</label>
+                            <input name="title" type="text" class="form-control shadow" id="exampleInputjudul" aria-describedby="judulHelp" placeholder="Enter sprint title">
+                        </div>
+                        <input type="hidden" name="projectID" value="<?php echo $project_id ?>">
+                        <input type="hidden" name="parentID" value="0" id="parentID">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-outline-secondary">Edit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="./detail.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </body>

@@ -41,7 +41,7 @@
                         <?php echo $nama ?>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Profile</a>
+                        <a class="dropdown-item" href="./profile.php">Profile</a>
                         <a class="dropdown-item" href="#">Logout</a>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                                     $data = mysqli_query($conn, $query);
                                     while ($hasil = mysqli_fetch_assoc($data)) {
                                     ?>
-                                        <a class="dropdown-item" href="./detail.php?id=<?php echo $hasil['project_id']  ?>" ><?php echo $hasil['judul'] ?></a>
+                                        <a class="dropdown-item" href="./detail.php?id=<?php echo $hasil['project_id']  ?>"><?php echo $hasil['judul'] ?></a>
                                     <?php
                                     }
                                     ?>
@@ -111,7 +111,17 @@
                         ?>
                             <div class="card m-3 col-md-3 shadow" style="width: 28rem;">
                                 <div class="card-body">
-                                    <h5 class="card-title"><?php echo $hasil['judul'] ?> </h5>
+                                    <h5 class="card-title"><?php echo $hasil['judul'] ?>
+                                        <form action="./action_deleteproject.php" method="post" class="d-inline">
+                                            <button type="submit" class="btn text-danger p-0">
+                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-circle mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                                    <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                                </svg>
+                                                <input type="hidden" name="id" value="<?php echo $hasil['project_id']  ?>">
+                                            </button>
+                                        </form>
+                                    </h5>
                                     <h6 class="card-subtitle mb-2 text-danger small"><?php echo $hasil['deadline'] ?></h6>
                                     <p class="card-text"><?php echo $hasil['deskripsi'] ?></p>
                                     <a href="./detail.php?id=<?php echo $hasil['project_id']  ?>" class="card-link">Detail</a>

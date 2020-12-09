@@ -3,3 +3,23 @@
   overflow: auto;
   height: auto;
 }
+.card-body{
+  overflow: auto;
+}
+
+/* .Content
+{
+}
+
+.Flipped, .Flipped .Content
+{
+    transform:rotateX(180deg);
+    -ms-transform:rotateX(180deg);
+    -webkit-transform:rotateX(180deg);
+} */
+
+#parentcard{
+    position: auto;
+    bottom: 0;
+    border-collapse: collapse;
+}

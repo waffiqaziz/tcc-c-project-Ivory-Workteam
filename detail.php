@@ -84,7 +84,7 @@
                 </div>
             </nav>
 
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 p-1">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
                     <?php
                     $query = "SELECT * FROM projects WHERE project_id = $project_id ;";
@@ -117,13 +117,13 @@
                         </button>
                     </div>
                 </div>
-                <div class="scrollmenu container rounded-lg shadow p-3" style="display: flex;">
+                <div class="scrollmenu container rounded-lg shadow p-2 Flipped" style="display: flex;">
                     <?php
                     $query = "SELECT * FROM sprint_parent WHERE project_id =  $project_id";
                     $parent = mysqli_query($conn, $query);
                     while ($hasil = mysqli_fetch_assoc($parent)) {
                     ?>
-                        <div id="parentcard" class="card m-3 col-md-3 shadow" style="width: 18rem; height:auto;">
+                        <div id="parentcard" class="card m-3 col-md-3 shadow Content" style="width: 18rem; height:100%;">
                             <div class="card-body">
                                 <h5 class="card-title d-inline mr-5"><?php echo $hasil['parent_judul'] ?></h5>
                                 <?php
@@ -133,15 +133,21 @@
                                 while ($result = mysqli_fetch_assoc($child)) {
                                 ?>
                                     <div class="card my-2" style="width: 100%; max-width:12em;">
-                                        <div class="card-body p-1">
-                                            <p class="card-title" style="height: auto;"><?php echo $result['child_judul'] ?>
-                                                <a href="#">
-                                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <div class="card-body p-1 ">
+                                            <p class="card-title d-inline" style="height: auto;">
+                                                <span class=""><?php echo $result['child_judul'] ?>
+                                                </span>
+                                            </p>
+                                            <form action="./action_deletechild.php" method="post" class="float-right d-inline">
+                                                <button type="submit" class="btn text-danger p-0">
+                                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-circle mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                         <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                                                         <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                                                     </svg>
-                                                </a>
-                                            </p>
+                                                    <input type="hidden" name="childID" value="<?php echo $result['child_id'] ?>">
+                                                    <input type="hidden" name="projectID" value="<?php echo $project_id ?>">
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
                                 <?php
@@ -152,9 +158,9 @@
                                     <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                                     <div class="dropdown-menu">
                                         <a id="editparent" bikinan="<?php echo $hasil['parent_id'] ?>" role="button" data-toggle="modal" data-target="#EditSprintModal" class="dropdown-item" href="#">Edit</a>
-                                        <form action="./action_deleteproject.php" method="post">
+                                        <form action="./action_deleteparent.php" method="post">
                                             <input type="hidden" name="parentID" value="<?php echo $hasil['parent_id'] ?>">
-                                            <input type="hidden" name="projectID" value="<?php echo $project_id?>">
+                                            <input type="hidden" name="projectID" value="<?php echo $project_id ?>">
                                             <button type="submit" class="btn dropdown-item">Delete</button>
                                         </form>
                                         <div class="dropdown-divider"></div>

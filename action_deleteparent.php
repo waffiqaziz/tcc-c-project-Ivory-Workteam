@@ -1,11 +1,15 @@
 <?php
 require_once("./connect.php");
-$id = $_POST['id'];
+$parentID = $_POST['parentID'];
+$project_id = $_POST['projectID'];
 
-$query = "DELETE FROM projects where project_id = $id";
+$query = "DELETE FROM sprint_parent where parent_id = $parentID";
+$hasil = mysqli_query($conn, $query);
+$query = "DELETE FROM sprint_child where parent_id = $parentID";
 $hasil = mysqli_query($conn, $query);
 if ($hasil) {
-    header("location:./homepage.php");
+    header("location:./detail.php?id=".$project_id);
 } else {
     header("location:./");
 }
+

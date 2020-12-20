@@ -12,6 +12,19 @@
 </head>
 
 <body>
+<?php
+session_start();
+if (isset($_SESSION['login'])) {
+    header("location:./homepage.php");
+}
+if (isset($_GET['msg'])) {
+    if ($_GET['msg'] == "regis") {
+        echo "<script>alert('Anda Berhasil Registrasi')</script>";
+    } else if ($_GET['msg'] == "loginfail") {
+        echo "<script>alert('Email atau Password anda salah')</script>";
+    }
+}   
+?>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark melayang">
         <a class="navbar-brand font-judul" href="./"><i class="fas fa-user-friends">iVory</i></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

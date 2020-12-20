@@ -14,7 +14,8 @@
 
 <body>
     <?php
-    session_start();
+    require_once("./auth.php");
+    require_once("./auth_detail.php");
     $nama = $_SESSION['nama'];
     $user_id = $_SESSION['id'];
     $project_id = $_GET['id'];
@@ -44,7 +45,7 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="./profile.php">Profile</a>
-                        <a class="dropdown-item" href="#">Logout</a>
+                        <a class="dropdown-item" href="./action_logout.php">Logout</a>
                     </div>
                 </div>
             </div>

@@ -12,6 +12,19 @@
 </head>
 
 <body>
+<?php
+session_start();
+if (isset($_SESSION['login'])) {
+    header("location:./homepage.php");
+}
+if (isset($_GET['msg'])) {
+    if ($_GET['msg'] == "errlogin") {
+        echo "<script>alert('Anda Belum Login')</script>";
+    } else if ($_GET['msg'] == "logout") {
+        echo "<script>alert('Anda berhasil Logout')</script>";
+    }
+}
+?>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark melayang">
         <a class="navbar-brand font-judul" href="#"><i class="fas fa-user-friends">iVory</i></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,13 +61,16 @@
                     <img src="./src/gambar1.png" class="d-block w-gambar rounded-lg shadow text-center" alt="gambar">
                 </div>
                 <div class="carousel-item ">
-                    <img src="./src/gambar 2.png" class="d-block w-gambar rounded-lg shadow text-center" alt="gambar">
+                    <img src="./src/gambar2.png" class="d-block w-gambar rounded-lg shadow text-center" alt="gambar">
                 </div>
                 <div class="carousel-item ">
                     <img src="./src/gambar3.png" class="d-block w-gambar rounded-lg shadow text-center" alt="gambar">
                 </div>
                 <div class="carousel-item ">
-                    <img src="./src/detail.png" class="d-block w-gambar rounded-lg shadow text-center" alt="gambar">
+                    <img src="./src/gambar4.png" class="d-block w-gambar rounded-lg shadow text-center" alt="gambar">
+                </div>
+                <div class="carousel-item ">
+                    <img src="./src/gambar5.png" class="d-block w-gambar rounded-lg shadow text-center" alt="gambar">
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                     <span class="sr-only">Previous</span>

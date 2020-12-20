@@ -13,10 +13,18 @@
 
 <body>
     <?php
-    session_start();
+    require_once("./auth.php");
+    if (isset($_GET['msg'])) {
+        if ($_GET['msg'] == "login") {
+            echo "<script>alert('Anda Berhasil Login')</script>";
+         } else if ($_GET['msg'] == "405") {
+            echo "<script>alert('Nyasar sob?')</script>";
+        }
+     }
     $nama = $_SESSION['nama'];
     $id = $_SESSION['id'];
     ?>
+    <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-dark">
         <a class="navbar-brand font-judul" href="./"><i class="fas fa-user-friends">iVory</i></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,12 +50,13 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="./profile.php">Profile</a>
-                        <a class="dropdown-item" href="#">Logout</a>
+                        <a class="dropdown-item" href="./action_logout.php">Logout</a>
                     </div>
                 </div>
             </div>
         </div>
     </nav>
+    <!-- sidebar -->
     <div class="container-fluid">
         <div class="row">
             <nav class="col-md-2 d-none d-md-block bg-light sidebar" style="height:100vh;">

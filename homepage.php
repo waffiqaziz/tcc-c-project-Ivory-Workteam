@@ -17,10 +17,12 @@
     if (isset($_GET['msg'])) {
         if ($_GET['msg'] == "login") {
             echo "<script>alert('Anda Berhasil Login')</script>";
-         } else if ($_GET['msg'] == "405") {
+        } else if ($_GET['msg'] == "405") {
             echo "<script>alert('Nyasar sob?')</script>";
+        } else if ($_GET['msg'] == "400") {
+            echo "<script>alert('Tanggalnya udah bener belum?')</script>";
         }
-     }
+    }
     $nama = $_SESSION['nama'];
     $id = $_SESSION['id'];
     ?>
@@ -121,15 +123,13 @@
                             <div class="card m-3 col-md-3 shadow" style="width: 28rem;">
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo $hasil['judul'] ?>
-                                        <form action="./action_deleteproject.php" method="post" class="d-inline">
-                                            <button type="submit" class="btn text-danger p-0">
-                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-circle mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                                                    <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                                                </svg>
-                                                <input type="hidden" name="id" value="<?php echo $hasil['project_id']  ?>">
-                                            </button>
-                                        </form>
+                                        <button id="editparent" bikinan="<?php echo $hasil['project_id'] ?>" data-toggle="modal" type="button" data-target="#myModal" class="btn text-danger p-0">
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-circle mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                                <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                            </svg>
+                                            <input type="hidden" name="id" value="<?php echo $hasil['project_id']  ?>">
+                                        </button>
                                     </h5>
                                     <h6 class="card-subtitle mb-2 text-danger small"><?php echo $hasil['deadline'] ?></h6>
                                     <p class="card-text"><?php echo $hasil['deskripsi'] ?></p>
@@ -179,6 +179,25 @@
             </div>
         </div>
     </div>
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header flex-column">
+                    <h4 class="modal-title w-100">Yakin mau hapus?</h4>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <form action="./action_deleteproject.php" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-danger">
+                            Delete
+                        </button>
+                        <input type="hidden" name="id" value="0" id="projID">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src=" ./homepage.js"> </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </body>

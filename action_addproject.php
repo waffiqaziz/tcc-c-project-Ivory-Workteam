@@ -17,6 +17,11 @@ $created_at = date("Y-m-d");
 $status = 0;
 $role  = 0;
 
+if ( $deadline < $created_at) {
+    header("location:./homepage.php?msg=400");
+    die();
+}
+
 $query = "INSERT INTO projects (judul, deskripsi, deadline, status, created_at) VALUES('$judul','$desc','$deadline','$status','$created_at')";
 $hasil = mysqli_query($conn, $query);
 

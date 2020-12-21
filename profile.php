@@ -13,10 +13,10 @@
 
 <body>
     <?php
-    require_once("./auth.php");
+    require_once("./auth.php");//mengecek login atau belum
     $nama = $_SESSION['nama'];
     $user_id = $_SESSION['id'];
-    if (!isset($_GET['id'])) {
+    if (!isset($_GET['id'])) { //kalau id dalam get ada pakai get[id] kalau tidak ada pakai session
         $id  = $user_id;
     } else {
         $id = $_GET['id'];
@@ -67,7 +67,7 @@
                                     <?php
                                     require_once("./connect.php");
                                     $query = "SELECT p.* FROM projects p, users u, workspace w WHERE u.user_id = w.user_id and p.project_id = w.project_id and u.user_id = $user_id ;";
-                                    $union = mysqli_query($conn, $query);
+                                    $union = mysqli_query($conn, $query); //union merupakan query gabungan 3 tabel yang mencari semua project berdasarkan id
                                     while ($hasil = mysqli_fetch_assoc($union)) {
                                     ?>
                                         <a class="dropdown-item" href="./detail.php?id=<?php echo $hasil['project_id']  ?>"><?php echo $hasil['judul'] ?></a>
@@ -87,7 +87,7 @@
                 </div>
             </nav>
             <?php
-            $query = "SELECT * FROM users WHERE user_id = $id ;";
+            $query = "SELECT * FROM users WHERE user_id = $id ;"; // mencari user 
             $data = mysqli_query($conn, $query);
             $hasil = mysqli_fetch_assoc($data);
             ?>
@@ -105,6 +105,8 @@
                         <p><strong>Skills: </strong>
                             <span class="tags"><?php echo $hasil['skill'] ?></span>
                         </p>
+                        <!-- jadi kalau akses melalui user profile dia ada tombol edit 
+                        sedangkan jika melalui project engga ada -->
                         <?php if (!isset($_GET['id'])) { ?>
                             <button type="button" class="btn btn-light rounded-circle shadow" role="button" data-toggle="modal" data-target="#TestModal"><b>Edit</b></button>
                         <?php }; ?>
@@ -114,7 +116,7 @@
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal tambah project-->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -148,6 +150,7 @@
             </div>
         </div>
     </div>
+    <!-- modal edit profile -->
     <div class="modal fade" id="TestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

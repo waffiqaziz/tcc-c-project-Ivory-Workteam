@@ -1,7 +1,7 @@
 <?php
     require_once "./connect.php";
     $email = $_POST["email"];
-    $password = md5($_POST["password"]);
+    $password = md5($_POST["password"]);//encrypt password
     $query = "select * from users where email='$email' and password='$password';";
     $hasil= mysqli_query($conn,$query);
     $cek= mysqli_num_rows($hasil);

@@ -14,13 +14,13 @@
 <body>
 <?php
 session_start();
-if (isset($_SESSION['login'])) {
+if (isset($_SESSION['login'])) {//jika sudah login di kembalikan ke hompage
     header("location:./homepage.php");
 }
 if (isset($_GET['msg'])) {
-    if ($_GET['msg'] == "regis") {
+    if ($_GET['msg'] == "regis") {//berhasil registrasi
         echo "<script>alert('Anda Berhasil Registrasi')</script>";
-    } else if ($_GET['msg'] == "loginfail") {
+    } else if ($_GET['msg'] == "loginfail") {//pasword atau email salah
         echo "<script>alert('Email atau Password anda salah')</script>";
     }
 }   
@@ -52,10 +52,6 @@ if (isset($_GET['msg'])) {
                     <label for="exampleInputPassword1">Password</label>
                     <input name="password" type="password" class="form-control shadow" id="exampleInputPassword1" placeholder="Password">
                 </div>
-                <!-- <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                </div> -->
                 <button type="submit" class="btn btn-dark mt-2 shadow">Submit</button>
             </form>
         </div>

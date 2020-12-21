@@ -14,13 +14,13 @@
 <body>
 <?php
 session_start();
-if (isset($_SESSION['login'])) {
+if (isset($_SESSION['login'])) {//jika user sudah login dikembalikan ke hompage
     header("location:./homepage.php");
 }
 if (isset($_GET['msg'])) {
-    if ($_GET['msg'] == "errlogin") {
+    if ($_GET['msg'] == "errlogin") {//error belum login
         echo "<script>alert('Anda Belum Login')</script>";
-    } else if ($_GET['msg'] == "logout") {
+    } else if ($_GET['msg'] == "logout") {//logout
         echo "<script>alert('Anda berhasil Logout')</script>";
     }
 }
@@ -85,7 +85,7 @@ if (isset($_GET['msg'])) {
         <hr>
         <h5 class="text-center">Copyright</h5>
     </footer>
-
+    <!-- boostrap -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </body>

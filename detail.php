@@ -14,8 +14,8 @@
 
 <body>
     <?php
-    require_once("./auth.php");
-    require_once("./auth_detail.php");
+    require_once("./auth.php"); //mengecek udah login atau belum
+    require_once("./auth_detail.php"); //mengecek akses project
     $nama = $_SESSION['nama'];
     $user_id = $_SESSION['id'];
     $project_id = $_GET['id'];
@@ -65,7 +65,7 @@
                                     <?php
                                     require_once("./connect.php");
                                     $query = "SELECT p.* FROM projects p, users u, workspace w WHERE u.user_id = w.user_id and p.project_id = w.project_id and u.user_id = $user_id ;";
-                                    $union = mysqli_query($conn, $query);
+                                    $union = mysqli_query($conn, $query); //mencari project berdasarkan user
                                     while ($hasil = mysqli_fetch_assoc($union)) {
                                     ?>
                                         <a class="dropdown-item" href="./detail.php?id=<?php echo $hasil['project_id']  ?>"><?php echo $hasil['judul'] ?></a>
@@ -93,11 +93,12 @@
                     $hasil = mysqli_fetch_assoc($data);
                     ?>
                     <h1 class="h2"><?php echo $hasil['judul'] ?></h1>
+                    <!-- invite teman -->
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
                             <?php
                             $query = "SELECT u.* FROM projects p, users u, workspace w WHERE u.user_id = w.user_id and p.project_id = w.project_id and p.project_id = $project_id ;";
-                            $union = mysqli_query($conn, $query);
+                            $union = mysqli_query($conn, $query); //menampilkan user berdasarkan project
                             while ($hasil = mysqli_fetch_assoc($union)) {
                             ?>
                                 <a class="btn btn-secondary rounded-circle mx-1" href="./profile.php?id=<?php echo $hasil['user_id'] ?>" title="<?php echo $hasil['name'] ?>">
@@ -158,6 +159,7 @@
                                 <div class="btn-group dropright d-inline">
                                     <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                                     <div class="dropdown-menu">
+                                        <!-- sedikit javascript untuk manipulasi nilai di modal -->
                                         <a id="editparent" bikinan="<?php echo $hasil['parent_id'] ?>" role="button" data-toggle="modal" data-target="#EditSprintModal" class="dropdown-item" href="#">Edit</a>
                                         <form action="./action_deleteparent.php" method="post">
                                             <input type="hidden" name="parentID" value="<?php echo $hasil['parent_id'] ?>">
@@ -168,6 +170,7 @@
                                         <a role="button" data-toggle="modal" data-target="#AddSprintModal" class="dropdown-item" href="#">New ... </a>
                                     </div>
                                 </div>
+                                <!-- sedikit javascript untuk manipulasi nilai di modal -->
                                 <button id="editparent" bikinan="<?php echo $hasil['parent_id'] ?>" type="button" data-toggle="modal" data-target="#CardModal" class="btn btn-sm btn-outline-secondary">
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="mb-1 bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -186,7 +189,7 @@
     </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal buat projedt -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -220,6 +223,7 @@
             </div>
         </div>
     </div>
+    <!-- Modal invite teman -->
     <div class="modal fade" id="TestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -245,6 +249,7 @@
             </div>
         </div>
     </div>
+    <!-- Modal buat task/card -->
     <div class="modal fade" id="CardModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -271,6 +276,7 @@
             </div>
         </div>
     </div>
+    <!-- Modal buat sprint -->
     <div class="modal fade" id="AddSprintModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -296,6 +302,7 @@
             </div>
         </div>
     </div>
+    <!-- Modal edit sprint -->
     <div class="modal fade" id="EditSprintModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

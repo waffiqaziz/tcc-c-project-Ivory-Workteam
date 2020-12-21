@@ -11,7 +11,7 @@ $user_id = (int)$hasil['user_id'];
 
 
 $projects_id = $_POST['projectID'];
-$role  = 1;
+$role  = 1;//1 untuk role anggota
 
 
 $query = "INSERT INTO workspace (user_id, project_id, role) VALUES('$user_id','$projects_id','$role')";

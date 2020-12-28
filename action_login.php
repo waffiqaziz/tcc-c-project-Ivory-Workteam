@@ -11,7 +11,7 @@
         $data= mysqli_fetch_array($hasil);
         $_SESSION["nama"]=$data["name"];
         $_SESSION["id"] = $data["user_id"];
-        $_SESSION["sort"] = "all";
+        $_SESSION["sort"] = "all";//fitur tambahan
         $_SESSION["login"]=true;
         header("location:./homepage.php?msg=login");
     }

@@ -137,9 +137,25 @@
                                     <div class="card my-2" style="width: 100%; max-width:12em;">
                                         <div class="card-body p-1 ">
                                             <p class="card-title d-inline" style="height: auto;">
-                                                <span class=""><?php echo $result['child_judul'] ?>
-                                                </span>
+                                                <?php if ($result['status'] == 0) { ?>
+                                                    <span class=""><?php echo $result['child_judul'] ?>
+                                                    </span>
+                                                <?php } else { ?>
+                                                    <span style="text-decoration:line-through"><?php echo $result['child_judul'] ?>
+                                                    </span>
+                                                <?php } ?>
                                             </p>
+                                            <form action="./action_donechild.php" method="post" class="float-right d-inline">
+                                                <button type="submit" class="btn text-success p-0">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="mb-1 bi bi-check-circle" viewBox="0 0 16 16">
+                                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                                        <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z" />
+                                                    </svg>
+                                                    <input type="hidden" name="status" value="<?php echo $result['status'] ?>">
+                                                    <input type="hidden" name="childID" value="<?php echo $result['child_id'] ?>">
+                                                    <input type="hidden" name="projectID" value="<?php echo $project_id ?>">
+                                                </button>
+                                            </form>
                                             <form action="./action_deletechild.php" method="post" class="float-right d-inline">
                                                 <button type="submit" class="btn text-danger p-0">
                                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-circle mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -166,8 +182,6 @@
                                             <input type="hidden" name="projectID" value="<?php echo $project_id ?>">
                                             <button type="submit" class="btn dropdown-item">Delete</button>
                                         </form>
-                                        <div class="dropdown-divider"></div>
-                                        <a role="button" data-toggle="modal" data-target="#AddSprintModal" class="dropdown-item" href="#">New ... </a>
                                     </div>
                                 </div>
                                 <!-- sedikit javascript untuk manipulasi nilai di modal -->
@@ -183,6 +197,11 @@
                     <?php
                     }
                     ?>
+                    <button type="button" data-toggle="modal" data-target="#AddSprintModal" href="#" class="btn btn-secondary  p-0" style="opacity: 0.7;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="text-center bi bi-plus" viewBox="0 0 16 16">
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                        </svg>
+                    </button>
                 </div>
         </div>
         </main>

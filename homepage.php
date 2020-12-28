@@ -13,18 +13,19 @@
 
 <body>
     <?php
-    require_once("./auth.php");//mengecek login atau belum
+    require_once("./auth.php"); //mengecek login atau belum
     if (isset($_GET['msg'])) {
         if ($_GET['msg'] == "login") {
             echo "<script>alert('Anda Berhasil Login')</script>";
-        } else if ($_GET['msg'] == "405") {//jikalau akses halaman orang lain
+        } else if ($_GET['msg'] == "405") { //jikalau akses halaman orang lain
             echo "<script>alert('Nyasar sob?')</script>";
-        } else if ($_GET['msg'] == "400") {//tanggal project kurang betul
+        } else if ($_GET['msg'] == "400") { //tanggal project kurang betul
             echo "<script>alert('Tanggalnya udah bener belum?')</script>";
         }
     }
     $nama = $_SESSION['nama'];
     $id = $_SESSION['id'];
+
     ?>
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-dark">
@@ -73,7 +74,7 @@
                                     <?php
                                     require_once("./connect.php");
                                     $query = "SELECT p.* FROM projects p, users u, workspace w WHERE u.user_id = w.user_id and p.project_id = w.project_id and u.user_id = $id ;";
-                                    $data = mysqli_query($conn, $query);//mencari project berdasarkan user
+                                    $data = mysqli_query($conn, $query); //mencari project berdasarkan user
                                     while ($hasil = mysqli_fetch_assoc($data)) {
                                     ?>
                                         <a class="dropdown-item" href="./detail.php?id=<?php echo $hasil['project_id']  ?>"><?php echo $hasil['judul'] ?></a>
@@ -98,18 +99,23 @@
                     <h1 class="h2">My Boards</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
-                            <button class="btn btn-sm btn-outline-secondary">Share</button>
-                            <button class="btn btn-sm btn-outline-secondary">Export</button>
+                            <div class="dropdown">
+                                <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                                    </svg>
+                                    This Week
+                                </a>
+                                <div class="dropdown-menu w-50 p-0" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="#">Week</a>
+                                    <a class="dropdown-item" href="#">Month</a>
+                                    <a class="dropdown-item" href="#">All</a>
+                                </div>
+                            </div>
                         </div>
-                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
-                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                                <line x1="16" y1="2" x2="16" y2="6"></line>
-                                <line x1="8" y1="2" x2="8" y2="6"></line>
-                                <line x1="3" y1="10" x2="21" y2="10"></line>
-                            </svg>
-                            This week
-                        </button>
                     </div>
                 </div>
                 <div class="project-display container ">
@@ -117,7 +123,7 @@
                         <?php
                         require_once("./connect.php");
                         $query = "SELECT p.* FROM projects p, users u, workspace w WHERE u.user_id = w.user_id and p.project_id = w.project_id and u.user_id = $id ;";
-                        $data = mysqli_query($conn, $query);//mencari project berdasarkan user
+                        $data = mysqli_query($conn, $query); //mencari project berdasarkan user
                         while ($hasil = mysqli_fetch_assoc($data)) {
                         ?>
                             <div class="card m-3 col-md-3 shadow" style="width: 28rem;">

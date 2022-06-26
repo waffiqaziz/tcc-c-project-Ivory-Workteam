@@ -1,0 +1,16 @@
+{
+    "name": "annas/ivory-workteam",
+    "description": "Trello Clone",
+    "autoload": {
+        "psr-4": {
+            "Annas\\IvoryWorkteam\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "adharuqudni",
+            "email": "annas.adharuqudni@tiket.com"
+        }
+    ],
+    "require": {}
+}

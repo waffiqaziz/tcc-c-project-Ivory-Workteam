@@ -1,0 +1,24 @@
+runtime: php55
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /
+  script: /index.php
+
+- url: /(.+\.php)$
+  script: \1
+
+# Serve static files.
+- url: /(.+\.(gif|png|jpg))$
+  static_files: \1
+  upload: .+\.(gif|png|jpg)$
+
+- url: /(.*\.(css|js))$
+  static_files: \1
+  upload: (.*\.(css|js))$
+
+# - url: /(.+\.(css|js))$
+#   static_files: \1
+#   upload: .+\.(css|js)$
+#   application_readable: true

@@ -77,7 +77,7 @@
                                     $data = mysqli_query($conn, $query); //mencari project berdasarkan user
                                     while ($hasil = mysqli_fetch_assoc($data)) {
                                     ?>
-                                        <a class="dropdown-item" href="./detail.php?id=<?php echo $hasil['project_id']  ?>"><?php echo $hasil['judul'] ?></a>
+                                        <a class="dropdown-item" href="./detail.php?id=<?php echo $hasil['project_id']  ?>"><?php echo $hasil['title'] ?></a>
                                     <?php
                                     }
                                     ?>
@@ -128,7 +128,7 @@
                         ?>
                             <div class="card m-3 col-md-3 shadow" style="width: 28rem;">
                                 <div class="card-body">
-                                    <h5 class="card-title"><?php echo $hasil['judul'] ?>
+                                    <h5 class="card-title"><?php echo $hasil['title'] ?>
                                         <!-- disini ada sedikit javascript untuk mengoper nilai projectid -->
                                         <button id="editparent" bikinan="<?php echo $hasil['project_id'] ?>" data-toggle="modal" type="button" data-target="#myModal" class="btn text-danger p-0">
                                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-circle mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -138,7 +138,7 @@
                                         </button>
                                     </h5>
                                     <h6 class="card-subtitle mb-2 text-danger small"><?php echo $hasil['deadline'] ?></h6>
-                                    <p class="card-text"><?php echo $hasil['deskripsi'] ?></p>
+                                    <p class="card-text"><?php echo $hasil['description'] ?></p>
                                     <a href="./detail.php?id=<?php echo $hasil['project_id']  ?>" class="card-link">Detail</a>
                                 </div>
                             </div>

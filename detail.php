@@ -68,7 +68,7 @@
                                     $union = mysqli_query($conn, $query); //mencari project berdasarkan user
                                     while ($hasil = mysqli_fetch_assoc($union)) {
                                     ?>
-                                        <a class="dropdown-item" href="./detail.php?id=<?php echo $hasil['project_id']  ?>"><?php echo $hasil['judul'] ?></a>
+                                        <a class="dropdown-item" href="./detail.php?id=<?php echo $hasil['project_id']  ?>"><?php echo $hasil['title'] ?></a>
                                     <?php
                                     }
                                     ?>
@@ -92,7 +92,7 @@
                     $data = mysqli_query($conn, $query);
                     $hasil = mysqli_fetch_assoc($data);
                     ?>
-                    <h1 class="h2"><?php echo $hasil['judul'] ?></h1>
+                    <h1 class="h2"><?php echo $hasil['title'] ?></h1>
                     <!-- invite teman -->
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
@@ -127,7 +127,7 @@
                     ?>
                         <div id="parentcard" class="card m-3 col-md-3 shadow Content" style="width: 18rem; height:100%;">
                             <div class="card-body">
-                                <h5 class="card-title d-inline mr-5"><?php echo $hasil['parent_judul'] ?></h5>
+                                <h5 class="card-title d-inline mr-5"><?php echo $hasil['parent_title'] ?></h5>
                                 <?php
                                 $parent_id = $hasil['parent_id'];
                                 $query = "SELECT * FROM sprint_child WHERE parent_id =  '$parent_id' ";
@@ -138,10 +138,10 @@
                                         <div class="card-body p-1 ">
                                             <p class="card-title d-inline" style="height: auto;">
                                                 <?php if ($result['status'] == 0) { ?>
-                                                    <span class=""><?php echo $result['child_judul'] ?>
+                                                    <span class=""><?php echo $result['child_title'] ?>
                                                     </span>
                                                 <?php } else { ?>
-                                                    <span style="text-decoration:line-through"><?php echo $result['child_judul'] ?>
+                                                    <span style="text-decoration:line-through"><?php echo $result['child_title'] ?>
                                                     </span>
                                                 <?php } ?>
                                             </p>

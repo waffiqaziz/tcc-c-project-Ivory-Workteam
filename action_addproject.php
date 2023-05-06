@@ -10,7 +10,7 @@ $hasil = mysqli_fetch_assoc($data);
 $user_id = (int)$hasil['user_id'];
 
 
-$judul = $_POST["judul"];
+$title = $_POST["title"];
 $desc = $_POST["desc"];
 $deadline = $_POST["date"];
 $created_at = date("Y-m-d");
@@ -22,10 +22,10 @@ if ( $deadline < $created_at) {
     die();
 }
 
-$query = "INSERT INTO projects (judul, deskripsi, deadline, status, created_at) VALUES('$judul','$desc','$deadline','$status','$created_at')";
+$query = "INSERT INTO projects (title, deskripsi, deadline, status, created_at) VALUES('$title','$desc','$deadline','$status','$created_at')";
 $hasil = mysqli_query($conn, $query);
 
-$query = "select project_id from projects where judul = '$judul' and created_at = '$created_at' ";
+$query = "select project_id from projects where title = '$title' and created_at = '$created_at' ";
 $data = mysqli_query($conn, $query);
 $hasil = mysqli_fetch_assoc($data);
 $projects_id = (int)$hasil['project_id'];
@@ -34,9 +34,9 @@ $query = "INSERT INTO workspace (user_id, project_id, role) VALUES('$user_id','$
 $hasil = mysqli_query($conn, $query);
 
 //langsung buat sprint baru
-$parent_judul = 'New...';
+$parent_title = 'New...';
 
-$query = "INSERT INTO sprint_parent (parent_judul, project_id) VALUES('$parent_judul','$projects_id')";
+$query = "INSERT INTO sprint_parent (parent_title, project_id) VALUES('$parent_title','$projects_id')";
 $hasil = mysqli_query($conn, $query);
 
 

@@ -4,7 +4,7 @@ $title = $_POST["title"];
 $project_id = $_POST["projectID"];
 $parent_id = $_POST["parentID"];
 
-$query = "UPDATE sprint_parent SET parent_judul ='$title' WHERE parent_id = $parent_id";
+$query = "UPDATE sprint_parent SET parent_title ='$title' WHERE parent_id = $parent_id";
 $hasil = mysqli_query($conn, $query);
 
 if ($hasil) {

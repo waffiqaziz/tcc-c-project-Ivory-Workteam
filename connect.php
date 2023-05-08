@@ -5,9 +5,10 @@
    $database = "ivory";
  
    $conn = mysqli_connect($host, $user, $pass, $database);
-   if ( !$conn )
+   if ( !$conn ) 
    {
        echo "Koneksi Gagal";
        exit;
    } 
+//    else echo "Koneksi MySQL berhasil\n"
 ?>

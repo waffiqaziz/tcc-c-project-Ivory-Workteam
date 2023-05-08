@@ -1,25 +1,27 @@
 <?php
-
 require_once "./utils.php";
+
 $email = $_POST["email"];
-$password = md5($_POST["password"]); //encrypt password
+$password = $_POST["password"]; //encrypt password
 
-$data = "email=a@gmail.com&pass=12345678";
+if($email == null || $password == null){
+ echo "<script>alert('Fill all the requirements')</script>";
+//  header("location:./login.php?msg=loginfail");
+} else{
+  $data = "email=$email&pass=$password";
+  
+  $result = callAPI("POST", 'http://localhost:3000/login', $data);
 
-$result = callAPI("POST", 'http://localhost:3000/login', $data);
-echo nl2br($result["error"]);
-echo nl2br($result["data"][0]["user_id"]);
-echo nl2br($result["data"][0]["name"]);
-
-if ($result == TRUE) {
-  echo ("Login Berhasil");
-  session_start();
-  $_SESSION["nama"] = $result["data"][0]["name"];
-  $_SESSION["id"] = $result["data"][0]["user_id"];
-  $_SESSION["sort"] = "all"; //fitur tambahan
-  $_SESSION["login"] = true;
-  header("location:./homepage.php?msg=login");
-} else {
-  echo ("Login Gagal");
-  header("location:./login.php?msg=loginfail");
+  if ($result["error"] == 0) {
+    echo ("Login Berhasil");
+    session_start();
+    $_SESSION["nama"] = $result["data"][0]["name"];
+    $_SESSION["id"] = $result["data"][0]["user_id"];
+    $_SESSION["sort"] = "all"; //fitur tambahan
+    $_SESSION["login"] = true;
+    header("location:./homepage.php?msg=login");
+  } else {
+    echo ("Login Gagal");
+    header("location:./login.php?msg=loginfail");
+  }
 }

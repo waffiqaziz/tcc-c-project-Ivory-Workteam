@@ -1,15 +1,24 @@
 <?php
+require_once "./utils.php";
 require_once("./connect.php");
+
 $nama = $_POST["name"];
 $email = $_POST["email"];
 $password = $_POST["password"];
-$password = md5($password);//encrypt password
 
-$query = "INSERT INTO users (name, email, password) VALUES('$nama','$email','$password')";
-$hasil = mysqli_query($conn,$query);
-if ($hasil) {
+if ($nama == null || $email == null || $password == null) {
+  header("location:./signup.php");
+  echo "<script>alert('Fill all the requirements')</script>";
+} else {
+  $data = "name=$nama&email=$email&pass=$password";
+
+  $result = callAPI("POST", 'http://localhost:3000/register', $data);
+
+  if ($result["error"] == 0) {
     header("location:./login.php?msg=regis");
-}
-else {
-    header("location:./");
+  } else if ($result["message"] == "Register Unsuccessfull! Email has been added!!!") {
+    header("location:./signup.php?msg=emailHasBeenAdded");
+  } else {
+    header("location:./login.php");
+  }
 }

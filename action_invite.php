@@ -15,9 +15,6 @@ $role  = 1;//1 untuk role anggota
 
 
 $query = "INSERT INTO workspace (user_id, project_id, role) VALUES('$user_id','$projects_id','$role')";
-$hasil = mysqli_query($conn, $query);
-
-
 
 if ($hasil) {
     header("location:./detail.php?id=".$projects_id);

@@ -20,7 +20,7 @@
         } else if ($_GET['msg'] == "405") { //jikalau akses halaman orang lain
             echo "<script>alert('Nyasar sob?')</script>";
         } else if ($_GET['msg'] == "400") { //tanggal project kurang betul
-            echo "<script>alert('Tanggalnya udah bener belum?')</script>";
+            echo "<script>alert('The deadline must match the date or later')</script>";
         }
     }
     $nama = $_SESSION['nama'];
@@ -165,11 +165,11 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="exampleInputjudul">Project Name</label>
-                            <input name="judul" type="text" class="form-control shadow" id="exampleInputjudul" aria-describedby="judulHelp" placeholder="Enter Project Name">
+                            <input name="title" type="text" class="form-control shadow" id="exampleInputjudul" aria-describedby="judulHelp" placeholder="Enter Project Name">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputdesc">Project description</label>
-                            <textarea class="form-control shadow" id="Textarea" placeholder="Description" required="" style="margin-top: 0px; margin-bottom: 0px; height: 58px;" name="desc"></textarea>
+                            <textarea name="description" class="form-control shadow" id="Textarea" placeholder="Description" required="" style="margin-top: 0px; margin-bottom: 0px; height: 58px;" name="desc"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputdate">Deadline</label>

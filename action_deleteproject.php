@@ -1,22 +1,12 @@
 <?php
-require_once("./connect.php");
-$id = $_POST['id'];
+require_once("./utils.php");
 
-$query = "SELECT parent_id from sprint_parent where project_id = '$id' ";
-$data = mysqli_query($conn, $query);
-//delete child
-while ($result = mysqli_fetch_assoc($data)){
-    $parent_id = $result['parent_id'];
-    $query = "DELETE FROM sprint_child where parent_id = $parent_id ";
-    $hasil = mysqli_query($conn, $query);
-}
-//delete project
-$query = "DELETE FROM projects where project_id = $id";
-$hasil = mysqli_query($conn, $query);
-//delete parent
-$query = "DELETE FROM sprint_parent where project_id = $id";
-$hasil = mysqli_query($conn, $query);
-if ($hasil) {
+$project_id = $_POST['id'];
+
+$data = "project_id=$project_id";
+$result = callAPI("DEL", $localhost . "deleteProject/$project_id", $data);
+
+if ($result["error"] == 0) {
     header("location:./homepage.php");
 } else {
     header("location:./");

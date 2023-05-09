@@ -1,12 +1,13 @@
 <?php
-require_once("./connect.php");
-$childID = $_POST['childID'];
+require_once "./utils.php";
+
+$child_id = $_POST['childID'];
 $project_id = $_POST['projectID'];
 
-$query = "DELETE FROM sprint_child where child_id = $childID";
-$hasil = mysqli_query($conn, $query);
+$data = "child_id=$child_id";
+$result = callAPI("DEL", $localhost . "deleteChild/$child_id", $data);
 
-if ($hasil) {
+if ($result["error"] == 0) {
     header("location:./detail.php?id=" . $project_id);
 } else {
     header("location:./");

@@ -1,17 +1,11 @@
 <?php
-require_once("./connect.php");
-
+require_once "./utils.php";
 session_start();
 
 $nama  = $_SESSION['nama'];
-$query = "select user_id from users where name = '$nama'";
-$data = mysqli_query($conn, $query);
-$hasil = mysqli_fetch_assoc($data);
-$user_id = (int)$hasil['user_id'];
-
-
+$user_id = $_SESSION["id"];
 $title = $_POST["title"];
-$desc = $_POST["desc"];
+$description = $_POST["description"];
 $deadline = $_POST["date"];
 $created_at = date("Y-m-d");
 $status = 0;//project belum selesai
@@ -22,25 +16,11 @@ if ( $deadline < $created_at) {
     die();
 }
 
-$query = "INSERT INTO projects (title, deskripsi, deadline, status, created_at) VALUES('$title','$desc','$deadline','$status','$created_at')";
-$hasil = mysqli_query($conn, $query);
+$data = "title=$title&deadline=$deadline&description=$description&status=$status&created_at=$created_at";
+$result = callAPI("POST", $localhost . "addProject/$user_id", $data);
 
-$query = "select project_id from projects where title = '$title' and created_at = '$created_at' ";
-$data = mysqli_query($conn, $query);
-$hasil = mysqli_fetch_assoc($data);
-$projects_id = (int)$hasil['project_id'];
-//insert table pivot
-$query = "INSERT INTO workspace (user_id, project_id, role) VALUES('$user_id','$projects_id','$role')";
-$hasil = mysqli_query($conn, $query);
-
-//langsung buat sprint baru
-$parent_title = 'New...';
-
-$query = "INSERT INTO sprint_parent (parent_title, project_id) VALUES('$parent_title','$projects_id')";
-$hasil = mysqli_query($conn, $query);
-
-
-if ($hasil) {
+if ($result["error"] == 0) {
+    echo ("Add project successfully");
     header("location:./homepage.php");
 } else {
     header("location:./");

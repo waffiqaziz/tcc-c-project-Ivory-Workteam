@@ -21,6 +21,11 @@
     } else {
         $id = $_GET['id'];
     }
+    if (isset($_GET['msg'])) {
+        if ($_GET['msg'] == "blankFill") { //berhasil registrasi
+          echo "<script>alert('Name Cannot be null')</script>";
+        }
+      }
     ?>
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-dark">
         <a class="navbar-brand font-judul" href="./"><i class="fas fa-user-friends">iVory</i></a>

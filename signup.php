@@ -20,6 +20,8 @@
   if (isset($_GET['msg'])) {
     if ($_GET['msg'] == "emailHasBeenAdded") { //berhasil registrasi
       echo "<script>alert('Register Unsuccessfull! Email has been added!!!')</script>";
+    } else if($_GET['msg'] == "blankFill"){
+      echo "<script>alert('Fill all the requirements')</script>";
     }
   }
   ?>

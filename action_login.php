@@ -6,11 +6,11 @@ $password = $_POST["password"]; //encrypt password
 
 if($email == null || $password == null){
  echo "<script>alert('Fill all the requirements')</script>";
-//  header("location:./login.php?msg=loginfail");
+ header("location:./login.php?msg=loginfail");
 } else{
   $data = "email=$email&pass=$password";
   
-  $result = callAPI("POST", 'http://localhost:3000/login', $data);
+  $result = callAPI("POST", $localhost."login", $data);
 
   if ($result["error"] == 0) {
     echo ("Login Berhasil");

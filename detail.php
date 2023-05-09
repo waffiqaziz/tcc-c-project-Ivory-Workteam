@@ -277,10 +277,10 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Add a Card </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                        <span aria-hidde    n="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="./action_addtask.php">
+                <form method="POST" action="./action_addchild.php">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="exampleInputjudul">Task</label>

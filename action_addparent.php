@@ -1,11 +1,13 @@
 <?php
-require_once("./connect.php");
+require_once "./utils.php";
+
 $title = $_POST["title"];
 $project_id = $_POST["projectID"];
 
-$query = "INSERT INTO sprint_parent (parent_title, project_id) VALUES('$title','$project_id')";
-$hasil = mysqli_query($conn, $query);
-if ($hasil) {
+$data = "parent_title=$title";
+$result = callAPI("POST", $localhost . "addParent/$project_id", $data);
+
+if ($result["error"] == 0) {
     header("location:./detail.php?id=" . $project_id);
 } else {
     header("location:./");

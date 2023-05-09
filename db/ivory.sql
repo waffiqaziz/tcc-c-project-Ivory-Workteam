@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2023 at 06:56 AM
+-- Generation Time: May 09, 2023 at 03:52 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -41,7 +41,7 @@ CREATE TABLE `projects` (
 --
 
 INSERT INTO `projects` (`project_id`, `title`, `description`, `deadline`, `status`, `created_at`) VALUES
-(44, 'Project 1', 'none', '2023-05-06', 0, '2023-05-05');
+(82, 'ewqewq', 'eqwe', '2023-05-18', 0, '2023-05-08');
 
 -- --------------------------------------------------------
 
@@ -61,8 +61,7 @@ CREATE TABLE `sprint_child` (
 --
 
 INSERT INTO `sprint_child` (`child_id`, `child_title`, `parent_id`, `status`) VALUES
-(102, 'Nice', 59, 0),
-(103, 'Wow', 59, 0);
+(113, '343243', 76, 1);
 
 -- --------------------------------------------------------
 
@@ -81,8 +80,7 @@ CREATE TABLE `sprint_parent` (
 --
 
 INSERT INTO `sprint_parent` (`parent_id`, `parent_title`, `project_id`) VALUES
-(59, 'New...', 44),
-(60, 'Next', 44);
+(76, 'Bismillah', 82);
 
 -- --------------------------------------------------------
 
@@ -105,8 +103,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `name`, `email`, `password`, `about`, `hobby`, `skill`) VALUES
-(19, '2', 'a@gmail.com', '25d55ad283aa400af464c76d713c07ad', '2', '2', '2'),
-(20, 'Hi', 'b@gmail.com', '25d55ad283aa400af464c76d713c07ad', '', '', '');
+(19, 'Waffiq', 'a@gmail.com', '25d55ad283aa400af464c76d713c07ad', '2', '2', '2');
 
 -- --------------------------------------------------------
 
@@ -126,7 +123,7 @@ CREATE TABLE `workspace` (
 --
 
 INSERT INTO `workspace` (`id_workspace`, `user_id`, `project_id`, `role`) VALUES
-(62, 19, 44, 0);
+(79, 19, 82, 0);
 
 --
 -- Indexes for dumped tables
@@ -156,7 +153,8 @@ ALTER TABLE `sprint_parent`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `workspace`
@@ -174,31 +172,31 @@ ALTER TABLE `workspace`
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT for table `sprint_child`
 --
 ALTER TABLE `sprint_child`
-  MODIFY `child_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+  MODIFY `child_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
 
 --
 -- AUTO_INCREMENT for table `sprint_parent`
 --
 ALTER TABLE `sprint_parent`
-  MODIFY `parent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `parent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `workspace`
 --
 ALTER TABLE `workspace`
-  MODIFY `id_workspace` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id_workspace` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- Constraints for dumped tables

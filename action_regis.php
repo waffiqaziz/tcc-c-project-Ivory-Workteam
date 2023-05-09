@@ -1,18 +1,16 @@
 <?php
 require_once "./utils.php";
-require_once("./connect.php");
 
 $nama = $_POST["name"];
 $email = $_POST["email"];
 $password = $_POST["password"];
 
 if ($nama == null || $email == null || $password == null) {
-  header("location:./signup.php");
-  echo "<script>alert('Fill all the requirements')</script>";
+  header("location:./signup.php?msg=blankFill");
 } else {
   $data = "name=$nama&email=$email&pass=$password";
 
-  $result = callAPI("POST", 'http://localhost:3000/register', $data);
+  $result = callAPI("POST",  $localhost.'register', $data);
 
   if ($result["error"] == 0) {
     header("location:./login.php?msg=regis");

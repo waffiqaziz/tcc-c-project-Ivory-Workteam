@@ -1,23 +1,40 @@
 <?php
-require_once("./connect.php");
-
-session_start();
+require_once("./utils.php");
 
 $email  = $_POST['email'];
-$query = "select user_id from users where email = '$email'";
-$data = mysqli_query($conn, $query);
-$hasil = mysqli_fetch_assoc($data);
-$user_id = (int)$hasil['user_id'];
+$projects_id = 	$_POST['projectID'];
 
+// $email  = "a@gmail.com";
+// $projects_id = 	86;
+$role  = 1; //1 untuk role anggota
 
-$projects_id = $_POST['projectID'];
-$role  = 1;//1 untuk role anggota
-
-
-$query = "INSERT INTO workspace (user_id, project_id, role) VALUES('$user_id','$projects_id','$role')";
-
-if ($hasil) {
-    header("location:./detail.php?id=".$projects_id);
+// get other user id , before it check the email first
+if($email == null) {
+	header("location:./detail.php?msg=fillEmail&id=".$projects_id);
 } else {
-    header("location:./");
+	$data = "email=$email";
+	$result = callAPI("GET",  $localhost . "getUserIDbyEmail/$email", $data);
+
+	if ($result["error"] == 1){
+		header("location:./detail.php?msg=emailNotFound&id=".$projects_id);
+	}else{
+		$user_id = $result['data'][0]["user_id"];
+
+		// check if user has been added/not
+		$data = "user_id=$user_id&project_id=$projects_id";
+		$result = callAPI("GET",  $localhost . 'checkInvitedMember', $data);
+		if ($result["error"] == 1) {
+
+			// insert into workspace
+			$data = "user_id=$user_id&project_id=$projects_id&role_user=1";
+			$result = callAPI("POST",  $localhost . 'addWorkspace', $data);
+			if ($result["error"] == 1) {
+				header("location:./detail.php?msg=hasAdded&id=".$projects_id);
+			} else {
+				header("location:./detail.php?msg=added&id=".$projects_id);
+			}	
+		} else {
+			header("location:./detail.php?msg=hasAdded&id=".$projects_id);
+		}
+	}
 }

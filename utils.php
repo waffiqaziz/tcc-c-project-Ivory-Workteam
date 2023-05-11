@@ -19,6 +19,11 @@ function callAPI($method, $url, $data)
       if ($data)
         curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
       break;
+    case "GET":
+      curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "GET");
+      if ($data)
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+      break;
     default:
       if ($data)
         $url = sprintf("%s?%s", $url, http_build_query($data));
@@ -34,10 +39,10 @@ function callAPI($method, $url, $data)
   curl_close($curl);
 
   $data = json_decode($result, true);
-  print_r($data);
+  // print_r($data); // test return file
   return $data;
 }
 
-$localhost = "http://localhost:3000/";
+$localhost = "http://localhost:3030/";
 
 // credit https://weichie.com/blog/curl-api-calls-with-php/
